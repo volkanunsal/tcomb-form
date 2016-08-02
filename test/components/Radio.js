@@ -3,7 +3,7 @@ import t from 'tcomb-validation'
 import bootstrap from 'tcomb-form-templates-bootstrap'
 import React from 'react'
 import { Radio } from '../../src/components'
-import { ctx, getRenderComponent } from './util'
+import { ctx, ctxBoth, getRenderComponent } from './util'
 const renderComponent = getRenderComponent(Radio)
 
 const transformer = {
@@ -26,7 +26,7 @@ tape('Radio', ({ test }) => {
   })
 
   test('label', (assert) => {
-    assert.plan(5)
+    assert.plan(6)
 
     assert.strictEqual(
       new Radio({
@@ -36,6 +36,15 @@ tape('Radio', ({ test }) => {
       }).getLocals().label,
       'Default label',
       'should have a default label')
+
+    assert.strictEqual(
+      new Radio({
+        type: Country,
+        options: {},
+        ctx: ctxBoth
+      }).getLocals().label,
+      'Default label',
+      'should have a default label if auto === both')
 
     assert.strictEqual(
       new Radio({

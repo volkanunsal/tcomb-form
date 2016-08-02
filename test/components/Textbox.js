@@ -3,7 +3,7 @@ import t from 'tcomb-validation'
 import bootstrap from 'tcomb-form-templates-bootstrap'
 import React from 'react'
 import { Textbox } from '../../src/components'
-import { ctx, ctxPlaceholders, ctxNone, getRenderComponent } from './util'
+import { ctx, ctxPlaceholders, ctxBoth, ctxNone, getRenderComponent } from './util'
 const renderComponent = getRenderComponent(Textbox)
 
 const transformer = {
@@ -69,7 +69,7 @@ tape('Textbox', ({ test }) => {
   })
 
   test('label', (assert) => {
-    assert.plan(6)
+    assert.plan(7)
 
     assert.strictEqual(
       new Textbox({
@@ -79,6 +79,15 @@ tape('Textbox', ({ test }) => {
       }).getLocals().label,
       'Default label',
       'should have a default label')
+
+    assert.strictEqual(
+      new Textbox({
+        type: t.Str,
+        options: {},
+        ctx: ctxBoth
+      }).getLocals().label,
+      'Default label',
+      'should have a default label if auto === both')
 
     ctx.i18n.required = ' (required)'
     assert.strictEqual(
@@ -119,7 +128,7 @@ tape('Textbox', ({ test }) => {
   })
 
   test('attrs.placeholder', (assert) => {
-    assert.plan(6)
+    assert.plan(7)
 
     assert.strictEqual(
       new Textbox({
@@ -156,6 +165,15 @@ tape('Textbox', ({ test }) => {
       }).getLocals().attrs.placeholder,
       'Default label',
       'should have a default placeholder if auto = placeholders')
+
+    assert.strictEqual(
+      new Textbox({
+        type: t.Str,
+        options: {},
+        ctx: ctxBoth
+      }).getLocals().attrs.placeholder,
+      'Default label',
+      'should have a default placeholder if auto = both')
 
     assert.strictEqual(
       new Textbox({

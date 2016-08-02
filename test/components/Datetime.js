@@ -3,12 +3,12 @@ import t from 'tcomb-validation'
 import bootstrap from 'tcomb-form-templates-bootstrap'
 import React from 'react'
 import { Datetime } from '../../src/components'
-import { ctx, getRenderComponent } from './util'
+import { ctx, ctxBoth, getRenderComponent } from './util'
 const renderComponent = getRenderComponent(Datetime)
 
 tape('Datetime', ({ test }) => {
   test('label', (assert) => {
-    assert.plan(4)
+    assert.plan(5)
 
     assert.strictEqual(
       new Datetime({
@@ -18,6 +18,15 @@ tape('Datetime', ({ test }) => {
       }).getLocals().label,
       'Default label',
       'should have a default label')
+
+    assert.strictEqual(
+      new Datetime({
+        type: t.Dat,
+        options: {},
+        ctx: ctxBoth
+      }).getLocals().label,
+      'Default label',
+      'should have a default label if auto === both')
 
     assert.strictEqual(
       new Datetime({

@@ -3,7 +3,7 @@ import t from 'tcomb-validation'
 import bootstrap from 'tcomb-form-templates-bootstrap'
 import React from 'react'
 import { Checkbox } from '../../src/components'
-import { ctx, ctxPlaceholders, getRenderComponent } from './util'
+import { ctx, ctxBoth, ctxPlaceholders, getRenderComponent } from './util'
 const renderComponent = getRenderComponent(Checkbox)
 
 const transformer = {
@@ -20,7 +20,7 @@ const transformer = {
 
 tape('Checkbox', ({ test }) => {
   test('label', (assert) => {
-    assert.plan(5)
+    assert.plan(6)
 
     assert.strictEqual(
       new Checkbox({
@@ -30,6 +30,15 @@ tape('Checkbox', ({ test }) => {
       }).getLocals().label,
       'Default label',
       'should have a default label')
+
+    assert.strictEqual(
+      new Checkbox({
+        type: t.Bool,
+        options: {},
+        ctx: ctxBoth
+      }).getLocals().label,
+      'Default label',
+      'should have a default label if auto === both')
 
     assert.strictEqual(
       new Checkbox({

@@ -26,6 +26,7 @@ function getContext(options) {
   return t.mixin(t.mixin({}, ctx), options, true)
 }
 
+const ctxBoth = getContext({auto: 'both'})
 const ctxPlaceholders = getContext({auto: 'placeholders'})
 const ctxNone = getContext({auto: 'none'})
 
@@ -41,6 +42,7 @@ function getRenderComponent(Component) {
 
 export default {
   ctx,
+  ctxBoth,
   ctxPlaceholders,
   ctxNone,
   getRenderComponent

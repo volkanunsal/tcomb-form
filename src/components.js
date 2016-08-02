@@ -188,7 +188,7 @@ export class Component extends React.Component {
 
   getLabel() {
     let label = this.props.options.label || this.props.options.legend
-    if (Nil.is(label) && this.getAuto() === 'labels') {
+    if (Nil.is(label) && (this.getAuto() === 'labels' || this.getAuto() === 'both')) {
       label = this.getDefaultLabel()
     }
     return label
@@ -296,7 +296,7 @@ export class Textbox extends Component {
   getPlaceholder() {
     const attrs = this.props.options.attrs || noobj
     let placeholder = attrs.placeholder
-    if (Nil.is(placeholder) && this.getAuto() === 'placeholders') {
+    if (Nil.is(placeholder) && (this.getAuto() === 'placeholders' || this.getAuto() === 'both')) {
       placeholder = this.getDefaultLabel()
     }
     return placeholder
